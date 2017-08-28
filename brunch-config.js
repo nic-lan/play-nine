@@ -10,5 +10,12 @@ exports.files = {
 };
 
 exports.plugins = {
-  babel: {presets: ['latest', 'react']}
+  babel: {presets: ['latest', 'react']},
+  autoReload: {
+    enabled: {
+      css: true,
+      js: true,
+      assets: false
+    }
+  }
 };
