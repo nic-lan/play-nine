@@ -2,7 +2,7 @@
 exports.files = {
   javascripts: {
     joinTo: {
-      'vendor.js': /^(?!app)/,
+      'vendor.js': /node_modules/,
       'app.js': /^app/
     }
   },

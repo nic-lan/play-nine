@@ -1,17 +1,24 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
+import _ from 'lodash'
 
 const Stars = (props) => {
+  const star_number = _.range(1, Math.floor(Math.random()*9))
+
   return (
-    <div>
-      ...
+    <div className="col-5">
+      {
+        star_number.map((i) =>
+          <i key={i} className="fa fa-star fa-2x"></i>
+        )
+      }
     </div>
   )
 }
 
 const Button = (props) => {
   return (
-    <div>
+    <div ClassName="col-2">
       <button>=</button>
     </div>
   );
@@ -19,17 +26,35 @@ const Button = (props) => {
 
 const Answer = (props) => {
   return (
-    <div>
+    <div className="col-5">
       ...
     </div>
   );
 }
 
-export class Game extends React.Component {
+const Numbers = (props) => {
+  const array_number = _.range(1, 9)
+  return (
+    <div className="card text-center">
+      <div>
+        {array_number.map((i) => <span key={i}>{i}</span>)}
+      </div>
+    </div>
+  );
+}
+
+class Game extends React.Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <h3>Play Nine</h3>
+        <hr />
+        <div className="row">
+          <Stars />
+          <Button />
+          <Answer />
+        </div>
+        <Numbers />
       </div>
     );
   }

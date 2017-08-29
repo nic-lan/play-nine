@@ -10,8 +10,10 @@
     "build": "brunch build --production"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "react": "^15.4",
-    "react-dom": "^15.4"
+    "react-dom": "^15.4",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "auto-reload-brunch": "^2.7.1",
