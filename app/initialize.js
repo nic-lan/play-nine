@@ -27,21 +27,29 @@ const Button = (props) => {
 const Answer = (props) => {
   return (
     <div className="col-5">
-      {
-        props.selectedNumbers.map(
-          (number, i) => <span key={i}>{number}</span>
-        )
-      }
+      {props.selectedNumbers.map(
+        (number, i) => <span key={i}>{number}</span>
+      )}
     </div>
   );
 }
 
 const Numbers = (props) => {
-  const array_number = _.range(1, 10)
+  const number_property = (number) => {
+    if (props.selectedNumbers.includes(number)) {
+      return  'selected'
+    }
+  }
   return (
     <div className="card text-center">
       <div>
-        {Numbers.list.map((i) => <span key={i}>{i}</span>)}
+        {Numbers.list.map((i) =>
+          <span
+            key={i}
+            className={number_property(i)}>
+              {i}
+          </span>
+        )}
       </div>
     </div>
   );
@@ -68,7 +76,7 @@ class Game extends React.Component {
           <Button />
           <Answer selectedNumbers={this.state.selectedNumbers} />
         </div>
-        <Numbers />
+        <Numbers selectedNumbers={this.state.selectedNumbers} />
       </div>
     );
   }
