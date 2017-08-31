@@ -61,17 +61,11 @@ const Numbers = (props) => {
 Numbers.list = _.range(1, 10)
 
 class Game extends React.Component {
-  constructor(props) {
-    super(props)
+  state = {
+    selectedNumbers: []
+  };
 
-    this.state = {
-      selectedNumbers: []
-    }
-  }
-
-  selectNumber(clickedNumber) {
-    console.log(clickedNumber)
-    console.log(this)
+  selectNumber = (clickedNumber) => {
     this.setState(prevState => ({
       selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
     }))
