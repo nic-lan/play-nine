@@ -3,12 +3,10 @@ import React from 'react';
 import _ from 'lodash';
 
 const Stars = (props) => {
-  const star_number = _.range(1, Math.floor(Math.random()*9))
-
   return (
     <div className="col-5">
       {
-        star_number.map((i) =>
+        props.starNumber.map((i) =>
           <i key={i} className="fa fa-star fa-2x"></i>
         )
       }
@@ -62,15 +60,16 @@ Numbers.list = _.range(1, 10)
 
 class Game extends React.Component {
   state = {
-    selectedNumbers: []
+    selectedNumbers: [],
+    starsNumber: _.range(1, Math.floor(Math.random()*9))
   };
 
   selectNumber = (clickedNumber) => {
-    if (!this.state.selectedNumbers.includes(clickedNumber)) {
-      this.setState(prevState => ({
-        selectedNumbers: this.state.selectedNumbers.concat(clickedNumber)
-      }))
-    }
+    if (this.state.selectedNumbers.includes(clickedNumber)) { return }
+
+    this.setState(prevState => ({
+      selectedNumbers: this.state.selectedNumbers.concat(clickedNumber)
+    }))
   };
 
   render() {
@@ -79,7 +78,7 @@ class Game extends React.Component {
         <h3>Play Nine</h3>
         <hr />
         <div className="row">
-          <Stars />
+          <Stars starNumber={this.state.starsNumber}/>
           <Button />
           <Answer selectedNumbers={this.state.selectedNumbers} />
         </div>
