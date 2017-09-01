@@ -79,26 +79,25 @@ class Game extends React.Component {
     this.setState(prevState => ({
      selectedNumbers: prevState
                         .selectedNumbers
-                        .filter(number =>
-                          number !== clickedNumber
-                        )
+                        .filter(number => number !== clickedNumber)
     }))
   };
 
   render() {
+    const { starsNumber, selectedNumbers } = this.state
     return (
       <div className="container">
         <h3>Play Nine</h3>
         <hr />
         <div className="row">
-          <Stars starNumber={this.state.starsNumber}/>
+          <Stars starNumber={starsNumber}/>
           <Button />
-          <Answer selectedNumbers={this.state.selectedNumbers}
+          <Answer selectedNumbers={selectedNumbers}
                   unselectNumber={this.unselectNumber}
             />
         </div>
         <Numbers
-          selectedNumbers={this.state.selectedNumbers}
+          selectedNumbers={selectedNumbers}
           selectNumber={this.selectNumber}
           />
       </div>
