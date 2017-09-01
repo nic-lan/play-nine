@@ -76,12 +76,13 @@ class Game extends React.Component {
   };
 
   unselectNumber = (clickedNumber) => {
-    let clickedNumberIndex = this.state.selectedNumbers.indexOf(clickedNumber);
-    if(clickedNumberIndex != -1) {
-      this.setState(prevState => ({
-       selectedNumbers: this.state.selectedNumbers.splice(clickedNumber, 1)
-      }))
-    }
+    this.setState(prevState => ({
+     selectedNumbers: prevState
+                        .selectedNumbers
+                        .filter(number =>
+                          number !== clickedNumber
+                        )
+    }))
   };
 
   render() {
