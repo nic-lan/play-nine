@@ -71,7 +71,7 @@ class Game extends React.Component {
     if (this.state.selectedNumbers.includes(clickedNumber)) { return }
 
     this.setState(prevState => ({
-      selectedNumbers: this.state.selectedNumbers.concat(clickedNumber)
+      selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
     }))
   };
 
