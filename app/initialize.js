@@ -16,6 +16,7 @@ const Stars = (props) => {
 
 const Button = (props) => {
   let button
+
   switch (props.answerIsCorrect) {
     case true:
       button = <button className="btn btn-success">
@@ -61,7 +62,7 @@ const Answer = (props) => {
 
 const Numbers = (props) => {
   const number_property = (number) => {
-    if (props.selectedNumbers.includes(number)) {
+    if (props.selectedNumbers.includes(number) || props.usedNumbers.includes(number)) {
       return  'selected'
     }
   }
@@ -89,7 +90,8 @@ class Game extends React.Component {
   state = {
     selectedNumbers: [],
     starsNumber: _.range(1, Math.floor(Math.random()*9)),
-    answerIsCorrect: null
+    answerIsCorrect: null,
+    usedNumbers: []
   };
 
   selectNumber = (clickedNumber) => {
@@ -109,18 +111,46 @@ class Game extends React.Component {
     }))
   };
 
-  checkAnswer = () => {
-    console.log(this.state.starsNumber)
-    console.log(this.state.selectedNumbers.reduce((a, b) => a + b, 0))
+  useSelectedNumbers = (currentSelectedNumbers, currentUsedNumber, answerIsCorrect) => {
+    if (answerIsCorrect) {
+      return currentUsedNumber.concat(currentSelectedNumbers);
+    }
+    else {
+      return currentUsedNumber;
+    };
+  };
 
-    this.setState(prevState => ({
-      answerIsCorrect: prevState.starsNumber.length ===
-        prevState.selectedNumbers.reduce((a, b) => a + b, 0)
-    }))
+  keep_or_rerun_stars = (current_stars_number, answerIsCorrect) => {
+    if (answerIsCorrect) {
+      return _.range(1, Math.floor(Math.random()*9));
+    }
+    else {
+      return current_stars_number;
+    };
   }
 
+  freeSelectedNumbers = (currentSelectedNumbers, answerIsCorrect) => {
+    if (answerIsCorrect) {
+      return [];
+    }
+    else {
+      return currentSelectedNumbers;
+    };
+  }
+
+  checkAnswer = () => {
+    const answerIsCorrect = this.state.starsNumber.length === this.state.selectedNumbers.reduce((a, b) => a + b, 0)
+
+    this.setState(prevState => ({
+      answerIsCorrect: answerIsCorrect,
+      starsNumber: this.keep_or_rerun_stars(prevState.starsNumber, answerIsCorrect),
+      usedNumbers: this.useSelectedNumbers(prevState.selectedNumbers, prevState.usedNumbers, answerIsCorrect),
+      selectedNumbers: this.freeSelectedNumbers(prevState.selectedNumbers, answerIsCorrect)
+    }))
+  };
+
   render() {
-    const { starsNumber, selectedNumbers, answerIsCorrect } = this.state
+    const { starsNumber, selectedNumbers, answerIsCorrect, usedNumbers } = this.state
     return (
       <div className="container">
         <h3>Play Nine</h3>
