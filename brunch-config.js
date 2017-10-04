@@ -1,26 +1,39 @@
 // See http://brunch.io for documentation.
-exports.files = {
-  javascripts: {
-    joinTo: {
-      'vendor.js': /node_modules/,
-      'app.js': /^app/
+module.exports = {
+  files: {
+    javascripts: {
+      joinTo: {
+        'vendor.js': /node_modules/,
+        'app.js': /^app/
+      }
+    },
+    stylesheets: {joinTo: 'app.css'}
+  },
+  modules: {
+    autoRequire: {
+      // outputFileName : [ entryModule ]
+      'test.js': ['spec/*.js']
     }
   },
-  stylesheets: {joinTo: 'app.css'}
-};
-
-exports.plugins = {
-  babel: {
-    presets: ['latest', 'react'],
-    plugins: [
-      'transform-class-properties'
-    ]
-  },
-  autoReload: {
-    enabled: {
-      css: true,
-      js: true,
-      assets: false
+  plugins: {
+    babel: {
+      presets: ['latest', 'react'],
+        plugins: [
+        'transform-class-properties'
+      ]
+    },
+    autoReload: {
+      enabled: {
+        css: true,
+        js: true,
+        assets: false
+      }
+    },
+    karma: {
+      singleRun: true,
+      browsers: ['PhantomJS'],
+      frameworks: ['jasmine'],
+      files: ['spec/*.js']
     }
   }
 };
