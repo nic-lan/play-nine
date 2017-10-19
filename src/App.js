@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Stars from './Stars';
-import './App.css';
 
 class App extends Component {
   render() {
@@ -8,7 +7,7 @@ class App extends Component {
       <div className="App">
         <Stars starsNumber={5} />
       </div>
-    );
+    )
   }
 }
 
