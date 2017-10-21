@@ -1,11 +1,12 @@
 import React from 'react'
+import Number from './Number'
 
-const Numbers = (props) => {
+const SelectedNumbers = (props) => {
   return (
     <div className="Numbers">
-      { props.selectedNumbers.map(i => <span key={i}>{ i }</span>) }
+      { props.selectedNumbers.map(i => <Number key={i} number={i} />) }
     </div>
   )
 }
 
-export default Numbers
+export default SelectedNumbers

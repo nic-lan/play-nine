@@ -12,6 +12,6 @@ it('renders SelectedNumbers', () => {
 
 it('button div', () => {
   const selectedNumbers = [1,2]
-  const wrapper = shallow(<SelectedNumbers selectedNumbers={[1,2]} />)
-  expect(wrapper.find('span').children().length).toEqual(selectedNumbers.length);
+  const wrapper = shallow(<SelectedNumbers selectedNumbers={selectedNumbers} />)
+  expect(wrapper.find('Number').length).toEqual(selectedNumbers.length);
 })

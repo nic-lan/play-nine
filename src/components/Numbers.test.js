@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Numbers from './Numbers'
+import Number from './Number'
 import { shallow } from 'enzyme'
 
 it('renders Numbers', () => {
@@ -12,6 +13,6 @@ it('renders Numbers', () => {
 
 it('button div', () => {
   const numbers = [1,2]
-  const wrapper = shallow(<Numbers numbers={[1,2]} />)
-  expect(wrapper.find('span').children().length).toEqual(numbers.length);
+  const wrapper = shallow(<Numbers numbers={numbers} />)
+  expect(wrapper.find('Number').length).toEqual(numbers.length);
 })
