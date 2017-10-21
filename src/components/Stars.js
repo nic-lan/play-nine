@@ -1,11 +1,12 @@
-import React from 'react';
+import React from 'react'
+import Star from './Star'
 
 const Stars = (props) => {
   return(
     <div className="Stars">
-      { props.starsNumber.map((i) => <i key={i} className="fa fa-star fa-2x" />) }
+      { props.starsNumber.map((i) => <Star key={i} />) }
     </div>
   )
 }
 
-export default Stars;
+export default Stars
