@@ -2,15 +2,17 @@ import React, { Component } from 'react'
 import Stars from './Stars'
 import CheckButton from './CheckButton'
 import Numbers from './Numbers'
+import SelectedNumbers from './SelectedNumbers'
 import { Pager, Grid, Col, Row } from 'react-bootstrap'
 
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
-      numbers: [1, 2],
-      starsNumber: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      starsNumber: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      selectedNumbers: [1, 2, 3, 4, 5]
     }
   }
   render() {
@@ -29,7 +31,7 @@ class App extends Component {
                 <CheckButton />
               </Col>
               <Col xs={12} md={5} className="Col">
-                Asnwer
+                <SelectedNumbers selectedNumbers={this.state.selectedNumbers}/>
               </Col>
             </Row>
             <Row>

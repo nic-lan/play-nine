@@ -12,6 +12,5 @@ it('renders Stars', () => {
 it('i div', () => {
   const numbers = [1,2]
   const wrapper = shallow(<Stars starsNumber={numbers} />)
-  console.log(wrapper.find('i').length);
   expect(wrapper.find('i').length).toEqual(numbers.length);
 });
