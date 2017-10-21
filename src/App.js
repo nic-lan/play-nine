@@ -9,10 +9,10 @@ class App extends Component {
       <div className="App">
         <Pager>
           <Grid>
-            <Row className="Row">
+            <Row >
               <h2>Play Nine</h2>
             </Row>
-            <Row className="Row">
+            <Row >
               <Col xs={12} md={5} >
                 <Stars starsNumber={9} />
               </Col>
