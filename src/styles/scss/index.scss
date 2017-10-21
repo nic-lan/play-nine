@@ -1,2 +1,31 @@
-// @import 'scss/App';
-@import 'row';
+@import "Col";
+
+.fa-star {
+  margin: 0.5em;
+}
+
+span {
+  display: inline-block;
+  margin: 0.5em;
+  text-align: center;
+  background-color: #ccc;
+  width: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #eee;
+  color: #ddd;
+  cursor: not-allowed;
+}
+
+.used {
+  background-color: #aabbaa;
+  color: #ddd;
+  cursor: not-allowed;
+}
+
+.row {
+  margin-bottom: 2.5em;
+}
