@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Stars from './Stars'
 import CheckButton from './CheckButton'
-import Numbers from './Numbers'
+import PlayNumbers from './PlayNumbers'
 import SelectedNumbers from './SelectedNumbers'
 import { Pager, Grid, Col, Row } from 'react-bootstrap'
 
@@ -14,7 +14,18 @@ class App extends Component {
       starsNumber: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       selectedNumbers: []
     }
+
+    this.selectNumber = this.selectNumber.bind(this);
   }
+
+  selectNumber(selectedNumber) {
+    this.setState(prevState => (
+      {
+        selectedNumbers: prevState.selectedNumbers.concat(selectedNumber)
+      }
+    ))
+  }
+
   render() {
     return (
       <div className="App">
@@ -23,7 +34,7 @@ class App extends Component {
             <Row >
               <h2>Play Nine</h2>
             </Row>
-            <Row >
+            <Row>
               <Col xs={12} md={5} className="Col">
                 <Stars starsNumber={this.state.starsNumber} />
               </Col>
@@ -36,7 +47,7 @@ class App extends Component {
             </Row>
             <Row>
               <Col xs={12} md={5} className="Col">
-                <Numbers numbers={this.state.numbers}/>
+                <PlayNumbers numbers={this.state.numbers} selectNumber={this.selectNumber}/>
               </Col>
             </Row>
           </Grid>

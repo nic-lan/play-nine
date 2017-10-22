@@ -1,18 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Numbers from './Numbers'
+import PlayNumbers from './PlayNumbers'
 import Number from './Number'
 import { shallow } from 'enzyme'
 
-it('renders Numbers', () => {
+it('renders PlayNumbers', () => {
   const numbers = [1,2]
-  const component = <Numbers numbers={numbers} />
+  const component = <PlayNumbers numbers={numbers} />
   const div = document.createElement('div')
   ReactDOM.render(component, div)
 })
 
 it('button div', () => {
   const numbers = [1,2]
-  const wrapper = shallow(<Numbers numbers={numbers} />)
+  const wrapper = shallow(<PlayNumbers numbers={numbers} />)
   expect(wrapper.find('Number').length).toEqual(numbers.length);
 })
