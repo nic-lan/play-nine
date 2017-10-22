@@ -4,24 +4,37 @@ import CheckButton from './CheckButton'
 import PlayNumbers from './PlayNumbers'
 import SelectedNumbers from './SelectedNumbers'
 import { Pager, Grid, Col, Row } from 'react-bootstrap'
+import _ from 'underscore'
+
 
 class App extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      playNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       starsNumber: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       selectedNumbers: []
     }
 
     this.selectNumber = this.selectNumber.bind(this);
+    this.unselectNumber = this.unselectNumber.bind(this);
   }
 
-  selectNumber(selectedNumber) {
+  selectNumber(number) {
     this.setState(prevState => (
       {
-        selectedNumbers: prevState.selectedNumbers.concat(selectedNumber)
+        selectedNumbers: prevState.selectedNumbers.concat(number),
+        playNumbers: _.without(prevState.playNumbers, number)
+      }
+    ))
+  }
+
+  unselectNumber(number) {
+    this.setState(prevState => (
+      {
+        selectedNumbers: _.without(prevState.selectedNumbers, number),
+        playNumbers: prevState.playNumbers.concat(number)
       }
     ))
   }
@@ -42,12 +55,15 @@ class App extends Component {
                 <CheckButton />
               </Col>
               <Col xs={12} md={5} className="Col">
-                <SelectedNumbers selectedNumbers={this.state.selectedNumbers}/>
+                <SelectedNumbers
+                  selectedNumbers={this.state.selectedNumbers}
+                  unselectNumber={this.unselectNumber}
+                />
               </Col>
             </Row>
             <Row>
               <Col xs={12} md={5} className="Col">
-                <PlayNumbers numbers={this.state.numbers} selectNumber={this.selectNumber}/>
+                <PlayNumbers numbers={this.state.playNumbers} selectNumber={this.selectNumber}/>
               </Col>
             </Row>
           </Grid>

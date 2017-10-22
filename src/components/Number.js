@@ -2,7 +2,7 @@ import React from 'react'
 
 const Number = (props) => {
   return (
-    <span onClick={ () => props.selectNumber(props.number) }>
+    <span onClick={ () => props.handleClick(props.number) }>
       { props.number }
     </span>
   )

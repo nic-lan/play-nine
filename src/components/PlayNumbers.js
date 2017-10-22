@@ -8,7 +8,7 @@ const PlayNumbers = (props) => {
           <Number
             key={i}
             number={i}
-            selectNumber={props.selectNumber}
+            handleClick={props.selectNumber}
           />
       )}
     </div>

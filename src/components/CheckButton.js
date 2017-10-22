@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 
 const CheckButton = () => {
   return(
-    <Button>=</Button>
+    <Button>Check Selection</Button>
   )
 }
 
