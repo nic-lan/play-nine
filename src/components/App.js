@@ -22,7 +22,9 @@ class App extends Component {
       'selectNumber',
       'unselectNumber',
       'checkAnswerForUnselection',
-      'storeAnswer'
+      'storeAnswer',
+      'defaultTemplate',
+      'successTemplate'
     ]
 
     functions_to_bind_with_this.forEach((f) => { this[f] = this[f].bind(this) })
@@ -69,7 +71,7 @@ class App extends Component {
     ))
   }
 
-  render() {
+  defaultTemplate() {
     return (
       <div className="App">
         <Pager>
@@ -103,6 +105,32 @@ class App extends Component {
         </Pager>
       </div>
     )
+  }
+
+  successTemplate() {
+    return(
+      <div className="App">
+        <Pager>
+          <Grid>
+            <Row>
+              <Col xs={12} md={5} className="Col">
+                <h1>Congratulation !!!</h1>
+                <p>You Won at PlayNine</p>
+              </Col>
+            </Row>
+          </Grid>
+        </Pager>
+      </div>
+    )
+  }
+
+  render() {
+    if(this.state.selectedNumbers.length < 1 && this.state.playNumbers.length < 1) {
+      return this.successTemplate()
+    }
+    else {
+      return this.defaultTemplate()
+    }
   }
 }
 

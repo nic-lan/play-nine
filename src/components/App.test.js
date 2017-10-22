@@ -24,6 +24,7 @@ describe('App', () => {
   it('plays nine', () => {
     // check initial number of rendered stars
     const starsNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    wrapper.setState({ starsNumber: starsNumber })
     expect(wrapper.find('Star')).toHaveLength(starsNumber.length)
 
     // check initial rendered PlayNumbers
@@ -75,5 +76,18 @@ describe('App', () => {
     expect(playNumbers).toHaveLength(8)
     expect(playNumbers.map(i => i.text())).not.toContain('9')
     expect(wrapper.find('CheckButton').text()).toEqual('Play some numbers')
+  })
+
+  describe('when is the last round', () => {
+    it('can win the game', () => {
+      wrapper.setState({ starsNumber: [0] })
+      wrapper.setState({ playNumbers: [1] })
+
+      find_numbers('PlayNumbers').first().simulate('click')
+
+      click_button()
+
+      expect(wrapper.text()).toEqual("Congratulation !!!You Won at PlayNine")
+    })
   })
 })
