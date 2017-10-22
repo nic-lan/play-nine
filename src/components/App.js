@@ -6,7 +6,6 @@ import SelectedNumbers from './SelectedNumbers'
 import { Pager, Grid, Col, Row } from 'react-bootstrap'
 import _ from 'underscore'
 
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -14,10 +13,16 @@ class App extends Component {
     this.state = {
       playNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       starsNumber: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-      selectedNumbers: []
+      selectedNumbers: [],
+      answerIsCorrect: null
     }
 
-    const functions_to_bind_with_this = ['checkAnswer', 'sum', 'selectNumber', 'unselectNumber']
+    const functions_to_bind_with_this = [
+      'sum',
+      'selectNumber',
+      'unselectNumber',
+      'checkAnswerForUnselection'
+    ]
 
     functions_to_bind_with_this.forEach((f) => { this[f] = this[f].bind(this) })
   }
@@ -26,7 +31,8 @@ class App extends Component {
     this.setState(prevState => (
       {
         selectedNumbers: prevState.selectedNumbers.concat(number),
-        playNumbers: _.without(prevState.playNumbers, number)
+        playNumbers: _.without(prevState.playNumbers, number),
+        answerIsCorrect: this.sum(prevState.selectedNumbers, number) === this.state.starsNumber.length
       }
     ))
   }
@@ -35,21 +41,22 @@ class App extends Component {
     this.setState(prevState => (
       {
         selectedNumbers: _.without(prevState.selectedNumbers, number),
-        playNumbers: prevState.playNumbers.concat(number)
+        playNumbers: prevState.playNumbers.concat(number),
+        answerIsCorrect: this.checkAnswerForUnselection(prevState.selectedNumbers, prevState.selectedNumbers, number)
       }
     ))
   }
 
-  sum(array) {
-    return array.reduce((a, b) => a + b, 0);
+  sum(array, number) {
+    return array.reduce((a, b) => a + b, 0) + number;
   }
 
-  checkAnswer() {
-    this.setState(prevState => (
-      {
-        answerIsCorrect: this.sum(prevState.selectedNumbers) === this.state.starsNumber.length
-      }
-    ))
+  checkAnswerForUnselection(selectedNumbers, starsNumber, number) {
+    let answer = null
+
+    if(selectedNumbers.length > 1) { answer = this.sum(selectedNumbers, number) === starsNumber.length }
+
+    return answer
   }
 
   render() {
@@ -65,7 +72,7 @@ class App extends Component {
                 <Stars starsNumber={this.state.starsNumber} />
               </Col>
               <Col xs={12} md={2} className="Col">
-                <CheckButton answerIsCorrect={this.state.answerIsCorrect} checkAnswer={this.checkAnswer}/>
+                <CheckButton answerIsCorrect={this.state.answerIsCorrect} />
               </Col>
               <Col xs={12} md={5} className="Col">
                 <SelectedNumbers
