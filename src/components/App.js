@@ -3,7 +3,7 @@ import Stars from './Stars'
 import CheckButton from './CheckButton'
 import PlayNumbers from './PlayNumbers'
 import SelectedNumbers from './SelectedNumbers'
-import { Pager, Grid, Col, Row } from 'react-bootstrap'
+import { Pager, Grid, Col, Row, Button } from 'react-bootstrap'
 import _ from 'underscore'
 
 class App extends Component {
@@ -18,14 +18,15 @@ class App extends Component {
       'storeAnswer',
       'defaultTemplate',
       'successTemplate',
-      'refreshStars'
+      'refreshStars',
+      'initializeStars'
     ]
 
     functions_to_bind_with_this.forEach((f) => { this[f] = this[f].bind(this) })
 
     this.state = {
       playNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-      starsNumber: this.refreshStars(),
+      starsNumber: this.initializeStars(),
       selectedNumbers: [],
       answerIsCorrect: null
     }
@@ -68,13 +69,21 @@ class App extends Component {
       {
         selectedNumbers: [],
         answerIsCorrect: null,
-        starsNumber: this.refreshStars()
+        starsNumber: this.initializeStars()
       }
     ))
   }
 
-  refreshStars() {
+  initializeStars() {
     return _.range(_.random(1, 9))
+  }
+
+  refreshStars() {
+    this.setState(prevState => (
+      {
+        starsNumber: this.initializeStars()
+      }
+    ))
   }
 
   defaultTemplate() {
@@ -83,7 +92,9 @@ class App extends Component {
         <Pager>
           <Grid>
             <Row >
-              <h2>Play Nine</h2>
+              <Col>
+                <h2>Play Nine <i onClick={() => this.refreshStars()} className="fa fa-refresh"/></h2>
+              </Col>
             </Row>
             <Row>
               <Col xs={12} md={5} className="Col">
