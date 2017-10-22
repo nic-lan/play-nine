@@ -17,12 +17,9 @@ class App extends Component {
       selectedNumbers: []
     }
 
-    // this['checkAnswer'] = this['checkAnswer'].bind(this)
-    // this['sum'] = this['sum'].bind(this)
-    this.checkAnswer = this.checkAnswer.bind(this)
-    this.sum = this.sum.bind(this)
-    this.selectNumber = this.selectNumber.bind(this)
-    this.unselectNumber = this.unselectNumber.bind(this)
+    const functions_to_bind_with_this = ['checkAnswer', 'sum', 'selectNumber', 'unselectNumber']
+
+    functions_to_bind_with_this.forEach((f) => { this[f] = this[f].bind(this) })
   }
 
   selectNumber(number) {
@@ -48,10 +45,6 @@ class App extends Component {
   }
 
   checkAnswer() {
-    console.log(this.sum(this.state.selectedNumbers) === this.state.starsNumber.length)
-    console.log(this.sum(this.state.selectedNumbers))
-    console.log(this.state.starsNumber.length)
-
     this.setState(prevState => (
       {
         answerIsCorrect: this.sum(prevState.selectedNumbers) === this.state.starsNumber.length

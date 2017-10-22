@@ -17,6 +17,10 @@ describe('App', () => {
     return wrapper.find(number_component).find('Number')
   }
 
+  const click_button = () => {
+    wrapper.find('CheckButton').simulate('click')
+  }
+
   it('plays nine', () => {
     // check initial number of rendered stars
     const starsNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -43,7 +47,11 @@ describe('App', () => {
     expect(playNumbers).toHaveLength(8)
     expect(playNumbers.map(i => i.text())).not.toContain('9')
 
-    // wrapper.find('CheckButton').simulate('click')
+    click_button()
+
+    expect(wrapper.find('CheckButton').find('.fa-check')).toBePresent()
+
+
     //
     // // remove selected Number from the selected Number box
     // find_numbers('SelectedNumbers').first().simulate('click')
