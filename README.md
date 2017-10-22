@@ -1,21 +1,15 @@
-# Brunch + React + Babel/ES6
+# Play Nine with React
 
-This is a modern JS skeleton with React for [Brunch](http://brunch.io).
-
-## Installation
-
-Clone this repo manually or use `brunch new dir -s brunch/with-react`
+This is a simple React game developed based on the popular [create-react-app](https://github.com/facebookincubator/create-react-app) boilerplate
 
 ## Getting started
 
 * Install (if you don't have them):
     * [Node.js](http://nodejs.org): `brew install node` on OS X
-    * [Brunch](http://brunch.io): `npm install -g brunch`
-    * Brunch plugins and app dependencies: `npm install`
+    * [Sass](http://sass-lang.com/install) in order to compile styles
+
 * Run:
-    * `npm start` — watches the project with continuous rebuild. This will also launch HTTP server with [pushState](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history).
+    * `npm start` — to run the app
     * `npm run build` — builds minified project for production
-* Learn:
-    * `public/` dir is fully auto-generated and served by HTTP server.  Write your code in `app/` dir.
-    * Place static files you want to be copied from `app/assets/` to `public/`.
-    * [Brunch site](http://brunch.io), [Getting started guide](https://github.com/brunch/brunch-guide#readme)
+    * `npm test` - to run tests
+    * `npm run sass` - to watch styles
