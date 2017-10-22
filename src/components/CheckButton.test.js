@@ -10,12 +10,10 @@ describe('CheckButton', () => {
     ReactDOM.render(<CheckButton  />, div)
   })
 
-
+  const answerIsCorrect = null
+  const wrapper = mount(<CheckButton answerIsCorrect={answerIsCorrect} />)
   it('asks to check the given selection', () => {
-    const answerIsCorrect = null
-    const wrapper = mount(<CheckButton answerIsCorrect={answerIsCorrect} />)
-    const buttonTag = '<button type="button" class="btn btn-default">Check Selection</button>'
-    expect(wrapper.html()).toEqual(buttonTag)
+    expect(wrapper.text()).toEqual('Play some numbers')
   })
 
   describe('when the answer is correct', () => {
@@ -23,9 +21,7 @@ describe('CheckButton', () => {
     const wrapper = mount(<CheckButton answerIsCorrect={answerIsCorrect} />)
 
     it('returns the success button', () => {
-      const buttonTag = <Button><i className="fa fa-check fa-2x"/></Button>
-
-      expect(wrapper).toContainReact(buttonTag)
+      expect(wrapper.find('.fa-check')).toBePresent()
     })
   })
 
@@ -34,9 +30,7 @@ describe('CheckButton', () => {
     const wrapper = mount(<CheckButton answerIsCorrect={answerIsCorrect} />)
 
     it('returns the insuccess button', () => {
-      const buttonTag = <Button disabled><i className="fa fa-times fa-2x"/></Button>
-
-      expect(wrapper).toContainReact(buttonTag)
+      expect(wrapper.find('.fa-times')).toBePresent()
     })
   })
 })

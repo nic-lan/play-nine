@@ -21,7 +21,8 @@ class App extends Component {
       'sum',
       'selectNumber',
       'unselectNumber',
-      'checkAnswerForUnselection'
+      'checkAnswerForUnselection',
+      'storeAnswer'
     ]
 
     functions_to_bind_with_this.forEach((f) => { this[f] = this[f].bind(this) })
@@ -30,7 +31,7 @@ class App extends Component {
   selectNumber(number) {
     this.setState(prevState => (
       {
-        selectedNumbers: prevState.selectedNumbers.concat(number),
+        selectedNumbers: prevState.selectedNumbers.concat(number).sort(),
         playNumbers: _.without(prevState.playNumbers, number),
         answerIsCorrect: this.sum(prevState.selectedNumbers, number) === this.state.starsNumber.length
       }
@@ -41,7 +42,7 @@ class App extends Component {
     this.setState(prevState => (
       {
         selectedNumbers: _.without(prevState.selectedNumbers, number),
-        playNumbers: prevState.playNumbers.concat(number),
+        playNumbers: prevState.playNumbers.concat(number).sort(),
         answerIsCorrect: this.checkAnswerForUnselection(prevState.selectedNumbers, prevState.selectedNumbers, number)
       }
     ))
@@ -59,6 +60,15 @@ class App extends Component {
     return answer
   }
 
+  storeAnswer() {
+    this.setState(prevState => (
+      {
+        selectedNumbers: [],
+        answerIsCorrect: null
+      }
+    ))
+  }
+
   render() {
     return (
       <div className="App">
@@ -72,7 +82,10 @@ class App extends Component {
                 <Stars starsNumber={this.state.starsNumber} />
               </Col>
               <Col xs={12} md={2} className="Col">
-                <CheckButton answerIsCorrect={this.state.answerIsCorrect} />
+                <CheckButton
+                  answerIsCorrect={this.state.answerIsCorrect}
+                  storeAnswer={this.storeAnswer}
+                />
               </Col>
               <Col xs={12} md={5} className="Col">
                 <SelectedNumbers

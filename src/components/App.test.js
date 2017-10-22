@@ -32,9 +32,9 @@ describe('App', () => {
     // check initial rendered SelectedNumbers
     expect(find_numbers('SelectedNumbers')).toHaveLength(0)
 
-    expect(wrapper.find('CheckButton').text()).toEqual('Check Selection')
+    expect(wrapper.find('CheckButton').text()).toEqual('Play some numbers')
 
-    const numberToSelect = find_numbers('PlayNumbers').first()
+    let numberToSelect = find_numbers('PlayNumbers').first()
     expect(numberToSelect.text()).toEqual('1')
 
     numberToSelect.simulate('click')
@@ -44,7 +44,7 @@ describe('App', () => {
     expect(selectedNumbers).toHaveLength(1)
 
     // and remove it from the ones to select
-    const playNumbers = find_numbers('PlayNumbers')
+    let playNumbers = find_numbers('PlayNumbers')
     expect(playNumbers).toHaveLength(8)
     expect(playNumbers.map(i => i.text())).not.toContain('1')
 
@@ -57,16 +57,23 @@ describe('App', () => {
     // // and it back to the play ones
     expect(find_numbers('PlayNumbers')).toHaveLength(9)
 
-    expect(wrapper.find('CheckButton').text()).toEqual('Check Selection')
-    // click_button()
+    expect(wrapper.find('CheckButton').text()).toEqual('Play some numbers')
 
+    numberToSelect = find_numbers('PlayNumbers').last()
+    expect(numberToSelect.text()).toEqual('9')
 
-    // click_button()
+    numberToSelect.simulate('click')
 
+    // check that button shows that the answer is not correct
+    expect(wrapper.find('CheckButton').find('.fa-check')).toBePresent()
 
+    click_button()
 
-    // expect(wrapper.find('Numbers').first()).to.equal(1);
-    // wrapper.find('a').simulate('click');
-    // expect(wrapper.find('.clicks-1').length).to.equal(1);
+    // check that clicking the button remove the given numbers from the game
+    expect(find_numbers('SelectedNumbers')).toHaveLength(0)
+    playNumbers = find_numbers('PlayNumbers')
+    expect(playNumbers).toHaveLength(8)
+    expect(playNumbers.map(i => i.text())).not.toContain('9')
+    expect(wrapper.find('CheckButton').text()).toEqual('Play some numbers')
   })
 })
