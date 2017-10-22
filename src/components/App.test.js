@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import { mount } from 'enzyme'
+import Button from 'react-bootstrap'
 
 describe('App', () => {
   it('renders without crashing', () => {
@@ -42,13 +43,13 @@ describe('App', () => {
     expect(playNumbers).toHaveLength(8)
     expect(playNumbers.map(i => i.text())).not.toContain('9')
 
-    const checkButton = wrapper.find('CheckButton')
-    exp
-    // remove selected Number from the selected Number box
-    find_numbers('SelectedNumbers').first().simulate('click')
-    expect(find_numbers('SelectedNumbers')).toHaveLength(0)
-    // and it back to the play ones
-    expect(find_numbers('PlayNumbers')).toHaveLength(9)
+    // wrapper.find('CheckButton').simulate('click')
+    //
+    // // remove selected Number from the selected Number box
+    // find_numbers('SelectedNumbers').first().simulate('click')
+    // expect(find_numbers('SelectedNumbers')).toHaveLength(0)
+    // // and it back to the play ones
+    // expect(find_numbers('PlayNumbers')).toHaveLength(9)
 
 
     // expect(wrapper.find('Numbers').first()).to.equal(1);

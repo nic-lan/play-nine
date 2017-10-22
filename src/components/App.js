@@ -13,12 +13,16 @@ class App extends Component {
 
     this.state = {
       playNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-      starsNumber: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      starsNumber: [0, 1, 2, 3, 4, 5, 6, 7, 8],
       selectedNumbers: []
     }
 
-    this.selectNumber = this.selectNumber.bind(this);
-    this.unselectNumber = this.unselectNumber.bind(this);
+    // this['checkAnswer'] = this['checkAnswer'].bind(this)
+    // this['sum'] = this['sum'].bind(this)
+    this.checkAnswer = this.checkAnswer.bind(this)
+    this.sum = this.sum.bind(this)
+    this.selectNumber = this.selectNumber.bind(this)
+    this.unselectNumber = this.unselectNumber.bind(this)
   }
 
   selectNumber(number) {
@@ -39,6 +43,22 @@ class App extends Component {
     ))
   }
 
+  sum(array) {
+    return array.reduce((a, b) => a + b, 0);
+  }
+
+  checkAnswer() {
+    console.log(this.sum(this.state.selectedNumbers) === this.state.starsNumber.length)
+    console.log(this.sum(this.state.selectedNumbers))
+    console.log(this.state.starsNumber.length)
+
+    this.setState(prevState => (
+      {
+        answerIsCorrect: this.sum(prevState.selectedNumbers) === this.state.starsNumber.length
+      }
+    ))
+  }
+
   render() {
     return (
       <div className="App">
@@ -52,7 +72,7 @@ class App extends Component {
                 <Stars starsNumber={this.state.starsNumber} />
               </Col>
               <Col xs={12} md={2} className="Col">
-                <CheckButton />
+                <CheckButton answerIsCorrect={this.state.answerIsCorrect} checkAnswer={this.checkAnswer}/>
               </Col>
               <Col xs={12} md={5} className="Col">
                 <SelectedNumbers
