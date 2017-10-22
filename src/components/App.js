@@ -10,13 +10,6 @@ class App extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      playNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-      starsNumber: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-      selectedNumbers: [],
-      answerIsCorrect: null
-    }
-
     const functions_to_bind_with_this = [
       'sum',
       'selectNumber',
@@ -24,10 +17,18 @@ class App extends Component {
       'checkAnswerForUnselection',
       'storeAnswer',
       'defaultTemplate',
-      'successTemplate'
+      'successTemplate',
+      'refreshStars'
     ]
 
     functions_to_bind_with_this.forEach((f) => { this[f] = this[f].bind(this) })
+
+    this.state = {
+      playNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      starsNumber: this.refreshStars(),
+      selectedNumbers: [],
+      answerIsCorrect: null
+    }
   }
 
   selectNumber(number) {
@@ -66,9 +67,14 @@ class App extends Component {
     this.setState(prevState => (
       {
         selectedNumbers: [],
-        answerIsCorrect: null
+        answerIsCorrect: null,
+        starsNumber: this.refreshStars()
       }
     ))
+  }
+
+  refreshStars() {
+    return _.range(_.random(1, 9))
   }
 
   defaultTemplate() {
